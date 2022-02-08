@@ -5,8 +5,14 @@ import {
   ViewUserModel,
 } from 'src/businesses/contracts/user-models';
 import { BaseService } from './base-service';
+import { Injectable } from '@nestjs/common';
+import { ConfigurationService } from 'src/configuration/configuration.service';
 
+@Injectable()
 export class UserService extends BaseService {
+  constructor(private configurationService: ConfigurationService) {
+    super();
+  }
   public create(payload: CreateUserModel): ViewUserModel {
     const createdUser = new User({
       id: 1,
@@ -33,18 +39,23 @@ export class UserService extends BaseService {
     });
   }
   public findAll() {
-    return [
-      new User({
-        id: 1,
-        email: 'example@yopmail.com',
-        firstName: 'Example',
-        lastName: 'User',
-        login: 'example.user',
-        type: UserTypes.MEMBER,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }),
-    ];
+    return {
+      pager: {
+        max: this.configurationService.getValues().limitRowsPerPage,
+      },
+      items: [
+        new User({
+          id: 1,
+          email: 'example@yopmail.com',
+          firstName: 'Example',
+          lastName: 'User',
+          login: 'example.user',
+          type: UserTypes.MEMBER,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        }),
+      ],
+    };
   }
   public update(id: number, payload: any) {
     return new User({

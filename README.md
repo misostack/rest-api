@@ -2,4 +2,12 @@
 
 ## Architecture
 
-- Modular
+> Clean Architecture
+
+## Getting start
+
+- Configuration: copy and replace related env
+
+```bash
+cp .env.sample .env
+```
