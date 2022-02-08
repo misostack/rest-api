@@ -4,7 +4,6 @@ import {
   CreateUserModel,
   ViewUserModel,
 } from 'src/businesses/contracts/user-models';
-import { instanceToPlain, plainToInstance } from 'class-transformer';
 import { BaseService } from './base-service';
 
 export class UserService extends BaseService {
@@ -19,7 +18,6 @@ export class UserService extends BaseService {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-    // return plainToInstance(ViewUserModel, instanceToPlain(createdUser));
     return this.entityToModel(createdUser, ViewUserModel);
   }
   findOne(id: number) {
