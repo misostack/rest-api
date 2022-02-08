@@ -7,23 +7,29 @@ import {
 import { BaseService } from './base-service';
 import { Injectable } from '@nestjs/common';
 import { ConfigurationService } from 'src/configuration/configuration.service';
+import { UserRepository } from 'src/persistence/repositories/UserRepository';
 
 @Injectable()
 export class UserService extends BaseService {
-  constructor(private configurationService: ConfigurationService) {
+  constructor(
+    private configurationService: ConfigurationService,
+    private userRepository: UserRepository,
+  ) {
     super();
   }
-  public create(payload: CreateUserModel): ViewUserModel {
-    const createdUser = new User({
-      id: 1,
+  public async create(payload: CreateUserModel): Promise<ViewUserModel> {
+    console.error(this.userRepository.example());
+    const createdUser = await this.userRepository.save({
+      login: payload.login,
+      password: payload.password,
       email: payload.email,
       firstName: payload.firstName,
       lastName: payload.lastName,
-      login: payload.login,
       type: payload.type,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
+    console.log(createdUser);
     return this.entityToModel(createdUser, ViewUserModel);
   }
   findOne(id: number) {
