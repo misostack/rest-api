@@ -1,5 +1,5 @@
-import { UserTypes } from 'src/domain/user';
-import { UserMember, UserAdmin, UserEntity } from 'src/domain/user/user';
+import { UserTypes } from 'src/domain/entity';
+import { UserMember, UserAdmin, UserEntity } from 'src/domain/entity/user';
 
 export abstract class UserFactory {
   public static createUser(model: Partial<UserAdmin | UserMember>): UserEntity {

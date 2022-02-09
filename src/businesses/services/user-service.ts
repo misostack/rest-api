@@ -1,4 +1,4 @@
-import { UserTypes } from 'src/domain/user';
+import { UserTypes } from 'src/domain/entity';
 import {
   CreateUserModel,
   ViewUserModel,

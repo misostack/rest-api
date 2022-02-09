@@ -1,6 +1,6 @@
 import { AbstractRepository, EntityRepository } from 'typeorm';
 import { User } from '../entity';
-import { UserEntity } from 'src/domain/user/user';
+import { UserEntity } from 'src/domain/entity/user';
 import { instanceToPlain } from 'class-transformer';
 import { UserFactory } from 'src/businesses/factories';
 

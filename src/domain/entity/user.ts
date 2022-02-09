@@ -1,5 +1,9 @@
-import { UserTypes } from '.';
-import { AbstractBaseEntity } from '../base-entity';
+import { AbstractBaseEntity } from './base-entity';
+
+export enum UserTypes {
+  ADMIN = 'admin',
+  MEMBER = 'member',
+}
 
 export abstract class UserEntity extends AbstractBaseEntity {
   login: string;

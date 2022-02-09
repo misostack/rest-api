@@ -1,4 +1,4 @@
-import { UserTypes } from '../../domain/user';
+import { UserTypes } from '../../domain/entity';
 import { Column, Entity, Index } from 'typeorm';
 import { BaseEntity } from './BaseEntity';
 
