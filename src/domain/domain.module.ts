@@ -15,4 +15,4 @@ import { UserService } from './services';
   providers: [UserService],
   exports: [UserService],
 })
-export class BusinessModule {}
+export class DomainModule {}

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UserTypes } from 'src/domain/entity';
+import { UserTypes } from 'src/domain/entities';
 
 export class ViewUserModel {
   @ApiProperty({})

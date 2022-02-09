@@ -11,8 +11,8 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   CreateUserModel,
   ViewUserModel,
-} from 'src/businesses/contracts/user-models';
-import { UserService } from 'src/businesses/services/user-service';
+} from 'src/domain/contracts/user-models';
+import { UserService } from 'src/domain/services';
 
 @ApiTags('users')
 @Controller('users')

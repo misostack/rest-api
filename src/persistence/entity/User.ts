@@ -1,6 +1,7 @@
-import { UserTypes } from '../../domain/entity';
 import { Column, Entity, Index } from 'typeorm';
 import { BaseEntity } from './BaseEntity';
+
+import { UserTypes } from '../../domain/entities';
 
 @Entity({
   name: 'users',
