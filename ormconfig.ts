@@ -1,4 +1,4 @@
-import { CustomNamingStrategy } from 'src/persistence/shared';
+import { CustomNamingStrategy } from './src/persistence/shared/index';
 
 export default {
   type: 'mysql',

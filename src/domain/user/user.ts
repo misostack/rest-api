@@ -1,13 +1,24 @@
 import { UserTypes } from '.';
 import { AbstractBaseEntity } from '../base-entity';
 
-export class User extends AbstractBaseEntity {
-  public login: string;
-  public email: string;
-  public firstName: string;
-  public lastName: string;
-  public type: UserTypes;
-  constructor(payload: User) {
+export abstract class UserEntity extends AbstractBaseEntity {
+  login: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  type: UserTypes;
+}
+
+export class UserMember extends UserEntity {
+  constructor(payload: Partial<UserMember>) {
     super(payload);
+    this.type = UserTypes.MEMBER;
+  }
+}
+
+export class UserAdmin extends UserEntity {
+  constructor(payload: Partial<UserAdmin>) {
+    super(payload);
+    this.type = UserTypes.ADMIN;
   }
 }

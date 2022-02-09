@@ -1,15 +1,15 @@
-import {
-  BeforeInsert,
-  BeforeUpdate,
-  Column,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, PrimaryColumn } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
+
+// https://github.com/typeorm/typeorm/issues/873
+// bigint -> string
 
 export abstract class BaseEntity {
-  @PrimaryGeneratedColumn({
-    type: 'bigint',
+  @PrimaryColumn({
+    type: 'varchar',
+    length: 36,
   })
-  id: number;
+  id: string;
   @Column({
     name: 'created_at',
     type: 'datetime',
@@ -20,21 +20,17 @@ export abstract class BaseEntity {
     type: 'datetime',
   })
   updatedAt: Date;
+
+  // https://typeorm.io/#/listeners-and-subscribers
   @BeforeInsert()
   beforeInsert() {
-    this.setCreateAndUpdateTime();
+    this.id = uuidv4();
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
   }
 
   @BeforeUpdate()
   beforeUpdate() {
-    this.setCreateAndUpdateTime();
-  }
-
-  setCreateAndUpdateTime() {
-    const now = new Date();
-    if (!this.id) {
-      this.createdAt = now;
-    }
-    this.updatedAt = now;
+    console.error('before Update');
   }
 }

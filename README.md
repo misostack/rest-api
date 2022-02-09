@@ -11,3 +11,11 @@
 ```bash
 cp .env.sample .env
 ```
+
+## DB Migration
+
+```bash
+yarn typeorm migration:generate -n CreateUserTable
+yarn typeorm migration:run
+yarn typeorm migration:show
+```

@@ -1,5 +1,4 @@
 import { UserTypes } from 'src/domain/user';
-import { User } from 'src/domain/user/user';
 import {
   CreateUserModel,
   ViewUserModel,
@@ -8,6 +7,7 @@ import { BaseService } from './base-service';
 import { Injectable } from '@nestjs/common';
 import { ConfigurationService } from 'src/configuration/configuration.service';
 import { UserRepository } from 'src/persistence/repositories/UserRepository';
+import { UserFactory } from '../factories';
 
 @Injectable()
 export class UserService extends BaseService {
@@ -17,32 +17,15 @@ export class UserService extends BaseService {
   ) {
     super();
   }
-  public async create(payload: CreateUserModel): Promise<ViewUserModel> {
-    console.error(this.userRepository.example());
-    const createdUser = await this.userRepository.save({
-      login: payload.login,
-      password: payload.password,
-      email: payload.email,
-      firstName: payload.firstName,
-      lastName: payload.lastName,
-      type: payload.type,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
-    console.log(createdUser);
+  public async create(model: CreateUserModel): Promise<ViewUserModel> {
+    const userEntity = UserFactory.createUser(model);
+    const createdUser = await this.userRepository.save(userEntity);
     return this.entityToModel(createdUser, ViewUserModel);
   }
-  findOne(id: number) {
-    return new User({
-      id: 1,
-      email: 'example@yopmail.com',
-      firstName: 'Example',
-      lastName: 'User',
-      login: 'example.user',
-      type: UserTypes.MEMBER,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
+
+  public async findById(id: string): Promise<ViewUserModel> {
+    const user = await this.userRepository.findById(id);
+    return this.entityToModel(user, ViewUserModel);
   }
   public findAll() {
     return {
@@ -50,8 +33,8 @@ export class UserService extends BaseService {
         max: this.configurationService.getValues().limitRowsPerPage,
       },
       items: [
-        new User({
-          id: 1,
+        UserFactory.createUser({
+          id: 'uuid_v4',
           email: 'example@yopmail.com',
           firstName: 'Example',
           lastName: 'User',
@@ -63,9 +46,9 @@ export class UserService extends BaseService {
       ],
     };
   }
-  public update(id: number, payload: any) {
-    return new User({
-      id: 1,
+  public update(id: string, payload: any) {
+    return UserFactory.createUser({
+      id: 'uuid_v4',
       email: 'example@yopmail.com',
       firstName: 'Example',
       lastName: 'User',
@@ -75,7 +58,7 @@ export class UserService extends BaseService {
       updatedAt: new Date(),
     });
   }
-  public remove(id: number) {
+  public remove(id: string) {
     return true;
   }
 }
