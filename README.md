@@ -4,14 +4,25 @@
 
 > Clean Architecture
 
+![document](./documents/architecture.jpg)
+
+## Design Pattern
+
+- Factory
+- DIP : Dependency inversion principle
+
+## Rules
+
+- SOLID
+
 ## Layers
 
 > Application: api
-> Domain : central layer, define entity, contracts, services, factory
-> Persistence: orm, repository
-> Configuration
-> Shared
-> Tools
+> Domain : entities, contracts, services, factories, repositories (abstract)
+> Persistence: repositories, orm entities
+> Configuration: configuration class
+> Shared: shared functions
+> Tools: other tools
 
 ## Getting start
 
