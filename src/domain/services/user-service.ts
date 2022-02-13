@@ -22,7 +22,10 @@ export class UserService extends BaseService {
   }
   public findAll() {
     return {
-      pager: {},
+      pager: {
+        pageNumber: 1,
+        itemsPerPage: 10,
+      },
       items: [
         UserFactory.createUser({
           id: 'uuid_v4',

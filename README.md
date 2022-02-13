@@ -50,6 +50,13 @@ yarn typeorm migration:show
 ## Docker
 
 ```bash
+docker-compose -f ./docker-compose.dev.yml up
+docker container exec -it rest-api-restapi-1 sh
+yarn typeorm migration:show
+yarn typeorm migration:run
+```
+
+```bash
 docker-compose up -d
 docker container exec -it rest-api-restapi-1 sh
 
