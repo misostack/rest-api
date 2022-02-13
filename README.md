@@ -49,6 +49,15 @@ yarn typeorm migration:show
 
 ## Docker
 
+```bash
+docker-compose up -d
+docker container exec -it rest-api-restapi-1 sh
+
+docker-compose down
+docker rmi $(docker images -aq --filter=reference='restapi')
+docker volume rm rest-api_db_data
+```
+
 ### MYSQL
 
 ```bash
