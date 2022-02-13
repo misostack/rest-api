@@ -1,7 +1,5 @@
 FROM node:lts-alpine
-WORKDIR /usr/api
+WORKDIR /app
 COPY ["package.json", "yarn.lock", "./"]
+COPY ["ormconfig.ts", "tsconfig.json", "tsconfig.build.json", "nest-cli.json", "./"]
 RUN yarn install
-COPY . .
-RUN yarn build
-CMD ["yarn", "start:dev"]

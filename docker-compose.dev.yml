@@ -6,20 +6,23 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile.dev
+    container_name: restapi
+    command: yarn start:debug
     env_file:
       - ./.env.development
     environment:
       NODE_ENV: development
     ports:
       - 3000:3000
+      - 9229:9229
     restart: always
     depends_on:
       - "db"
     networks:
       - rest-api
     volumes:
-      - ./src/:/usr/api/src
-      - ./test/:/usr/api/test
+      - ./src/:/app/src
+      - ./test/:/app/test
   db:
     image: mysql:8.0.28
     restart: always
