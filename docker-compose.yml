@@ -6,9 +6,10 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    env_file:
+      - ./.env.production
     environment:
       NODE_ENV: production
-      DATABASE_URL: mysql://root:123456@db/rest_api
     ports:
       - 3000:3000
     restart: always

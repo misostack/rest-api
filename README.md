@@ -32,6 +32,13 @@
 cp .env.sample .env
 ```
 
+## Production
+
+```bash
+touch .env.production
+echo "DATABASE_URL=mysql://root:123456@db/rest_api" > .env.production
+```
+
 ## DB Migration
 
 ```bash
