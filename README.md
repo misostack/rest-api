@@ -20,7 +20,7 @@
 > Application: api
 > Domain : entities, contracts, services, factories, repositories (abstract)
 > Persistence: repositories, orm entities
-> Configuration: configuration class
+> Config: configuration class
 > Shared: shared functions
 > Tools: other tools
 
@@ -38,4 +38,12 @@ cp .env.sample .env
 yarn typeorm migration:generate -n CreateUserTable
 yarn typeorm migration:run
 yarn typeorm migration:show
+```
+
+## Docker
+
+### MYSQL
+
+```bash
+docker run --name jsguru-db -p 3307:3306 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=rest-api -e MYSQL_USER=jsguru -e MYSQL_PASSWORD=123456 mysql:8.0.28 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ```

@@ -1,8 +1,9 @@
+import { DatabaseConfigService } from './src/config/database-config.service';
 import { CustomNamingStrategy } from './src/persistence/shared/index';
 
 export default {
   type: 'mysql',
-  url: process.env.DATABASE_URL,
+  url: new DatabaseConfigService().getConfigValues().url,
   synchronize: false,
   logging: true,
   timezone: 'Z',

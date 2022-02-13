@@ -2,12 +2,12 @@ import { UserTypes } from 'src/domain/entities';
 import { CreateUserModel, ViewUserModel } from '../contracts/user-models';
 import { BaseService } from './base-service';
 import { Injectable } from '@nestjs/common';
-import { ConfigurationService } from 'src/configuration/configuration.service';
+
 import { UserFactory } from '../factories';
 
 @Injectable()
 export class UserService extends BaseService {
-  constructor(private configurationService: ConfigurationService) {
+  constructor() {
     super();
   }
   public async create(model: CreateUserModel): Promise<ViewUserModel> {
@@ -22,9 +22,7 @@ export class UserService extends BaseService {
   }
   public findAll() {
     return {
-      pager: {
-        max: this.configurationService.getValues().limitRowsPerPage,
-      },
+      pager: {},
       items: [
         UserFactory.createUser({
           id: 'uuid_v4',
